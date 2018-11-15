@@ -6,7 +6,7 @@ exports.findAllClients = function(req, res) {
 	ClientesDB.find(function(err, clients) {
     if(err) res.send(500, err.message);
 
-    console.log('GET /clients')
+    console.log('GET /clientes')
 		res.status(200).jsonp(clients);
 	});
 };
