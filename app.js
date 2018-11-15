@@ -1,20 +1,33 @@
-var express = require ("express"), /*express nos ayuda a la creacion del servidor http */
-	app = express(),
-	bodyParser = require("body-parser"),/*nos permite hacer el parse de json*/
-	methodOverride = require("method-override");/*nos permite implementar y personalizar los metodos HTTP*/
+var express         = require("express"),
+    app             = express(),
+    bodyParser      = require("body-parser"),
+    methodOverride  = require("method-override"),
+    mongoose        = require('mongoose');
 
-app.use(bodyParser.urlencoded({extended: false}));
+// Connection to DB
+mongoose.connect('mongodb://localhost/clientes', function(err, res) {
+  if(err) throw err;
+  console.log('Connected to Database');
+});
+
+// Middlewares
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
 
-var router = express.Router();
+// Import Models and controllers
+var models     = require('./models/clientes')(app, mongoose);
+var clenteCTRL = require('./controllers/clientesController');
 
-router.get('/',function (req,res) {
-	res.send("Hello World!");
-});
+// API routes
+var clientesRoute = express.Router();
 
-app.use(router);
+clientesRoute.route('/clientes')
+  .get(clenteCTRL.findAllClients);
 
-app.listen(3000,function() {
-	console.log("Server is running in http://localhost:3000");
+app.use('/api', clientesRoute);
+
+// Start server
+app.listen(3000, function() {
+  console.log("Node server running on http://localhost:3000");
 });

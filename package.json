@@ -1,25 +1,10 @@
 {
-  "name": "microservicio-registro-clientes",
-  "version": "1.0.0",
-  "description": "Este microservicio creara un cliente en una db de mongo",
-  "main": "app.js",
+  "name": "node-api-rest-example",
+  "version": "2.0.0",
   "dependencies": {
     "mongoose": "~3.6.11",
     "express": "^4.7.1",
     "method-override": "^2.1.2",
     "body-parser": "^1.5.1"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jcorremo/microserviciocreacioncliente.git"
-  },
-  "author": "Andres correa",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jcorremo/microserviciocreacioncliente/issues"
-  },
-  "homepage": "https://github.com/jcorremo/microserviciocreacioncliente#readme"
+  }
 }
