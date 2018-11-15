@@ -5,7 +5,14 @@ var express         = require("express"),
     mongoose        = require('mongoose');
 
 // Connection to DB
-mongoose.connect('mongodb://10.239.104.63/customer', function(err, res) {
+var puertoDB = process.env.PORTDB;
+var hostDB = process.env.HOSTDB;
+var userDB = process.env.USERDB;
+var passDB = process.env.PASSDB;
+var dbName = process.env.DBNAME;
+
+
+mongoose.connect('mongodb://userDB:passDB@hostDB:puertoDB/dbName', function(err, res) {
   if(err) throw err;
   console.log('Connected to Database');
 });
