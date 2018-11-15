@@ -10,6 +10,6 @@ exports = module.exports = function(app, mongoose) {
    	razonSocial: String
    });
 
-	mongoose.model('Clientes', clienteSchema);
+	mongoose.model('Customer', clienteSchema);
 
 };
