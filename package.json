@@ -1,10 +1,13 @@
 {
-  "name": "node-api-rest-example",
-  "version": "2.0.0",
+  "name": "micro-consulta-cliente",
+  "version": "0.0.1",
+  "description": "Micro servicio para consultar datos del cliente",
+  "main": "server.js",
   "dependencies": {
-    "mongoose": "~3.6.11",
-    "express": "^4.7.1",
-    "method-override": "^2.1.2",
-    "body-parser": "^1.5.1"
+    "mongoose": "latest",
+    "express": "latest",
+    "method-override": "latest",
+    "body-parser": "latest",
+    "rxjs": "latest"
   }
 }
