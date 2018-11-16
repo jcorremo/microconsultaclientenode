@@ -47,10 +47,13 @@ exports.findAll = function (req,res) {
 
 
 exports.findById = function(req,res) {
+	res.status(200).send(req.params.id);
+	/*
 	customerModel.findById(req.params.id,function (err,customer) {
 		if(err) res.send(500, err.message);
 		else 
 			console.log("METODO GET CON ID");
-			res.status(200).send(customer);
-	});
+			if(req.params.id == "5"){ res.status(200).send(req.params.id);}
+			else {res.status(200).send(customer);}
+	});*/
 };
