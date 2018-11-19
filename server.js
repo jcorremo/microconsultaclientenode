@@ -11,8 +11,11 @@ var userDB = process.env.USERDB;
 var passDB = process.env.PASSDB;
 var nameDB = process.env.NAMEDB;
 
-mongoose.connect("mongodb://"+userDB+":"+passDB+"@"+hostDB+":"+portDB"/"+nameDB,
-	{ useNewUrlParser: true },
+var urltoDB = "mongodb://"+userDB+":"+passDB+"@"+hostDB+":"+portDB+"/"+nameDB;
+
+console.log(urltoDB);
+
+mongoose.connect(urltoDB, { useNewUrlParser: true },
 	function (err,res) {
 	if(err) console.log("Error en la conexion hacia la DB" + err);
 	else console.log("Conectado a la DB");
