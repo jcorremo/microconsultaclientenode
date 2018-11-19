@@ -2,19 +2,32 @@ const { Observable, Subject, ReplaySubject, from, of, range } = require('rxjs');
 const { map, filter, switchMap } = require('rxjs/operators');
 const RxHttpRequest = require('rx-http-request').RxHttpRequest;
 
+
+/*
+
+Hay que mirar los call back ya que al todas las funciones ejecutarse de manera asincrona, si en determinado momento
+alguna funcion que se requiera entregue un dato no lo responde antes de que se ejecute la otra, quedarán los elementos
+sin un valor.
+
+Ejemplo en la funcion transformJSON se lama un web service, si el demora en responder, el observador de la funcion findAll acabará
+y respondera sin datos.
+
+*/
+
 var mongoose = require("mongoose"),
 	customerModel = mongoose.model("customer"),
 	http = require('http');
 
 function transformJSON(jsonCustomer){
-
+	var responseBody = "";
 	RxHttpRequest.get('http://localhost:8089/customer').subscribe(
-		x => console.log(x.body),
+		x => responseBody += x.body,
 		err => console.log(err),
 		onComplete => console.log("REQUEST TERMINADO")
 	);
 
-	return {nombre : jsonCustomer.nombre + jsonCustomer.codigoSolicitante};
+	return {nombre : jsonCustomer.nombre + jsonCustomer.codigoSolicitante,
+			webservice : responseBody};
 }
 
 exports.findAll = function (req,res) {
