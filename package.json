@@ -8,6 +8,8 @@
     "express": "latest",
     "method-override": "latest",
     "body-parser": "latest",
-    "rxjs": "latest"
+    "rxjs": "latest",
+    "http": "latest",
+    "rx-http-request": "latest"
   }
 }

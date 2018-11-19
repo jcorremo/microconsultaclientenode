@@ -1,59 +1,46 @@
 const { Observable, Subject, ReplaySubject, from, of, range } = require('rxjs');
 const { map, filter, switchMap } = require('rxjs/operators');
+const RxHttpRequest = require('rx-http-request').RxHttpRequest;
+
 var mongoose = require("mongoose"),
-	customerModel = mongoose.model("customer");
+	customerModel = mongoose.model("customer"),
+	http = require('http');
 
-/*
-exports.findAll = function (req,res) {
-	customerModel.find(function (err, customers) {
-		if(err) res.send(500, err.message);
-		else 
-			res.status(200).send(customers);//stream de datos, debo retornar un observavle, subscribirme a el para el haga
-			//la llamada y antes de retornar los datos, debo transformarlos
-	});	
-};
-*/
-var datosRespuesta  = [];
+function transformJSON(jsonCustomer){
+
+	RxHttpRequest.get('http://localhost:8089/customer').subscribe(
+		x => console.log(x.body),
+		err => console.log(err),
+		onComplete => console.log("REQUEST TERMINADO")
+	);
+
+	return {nombre : jsonCustomer.nombre + jsonCustomer.codigoSolicitante};
+}
 
 exports.findAll = function (req,res) {
+	var customersResponse  = [];
 	customerModel.find(function (err, customers) {
 		if(err) 
 			res.send(500, err.message);
 		else 
-			var custReactive = from(customers);
-			custReactive
-			.pipe(
-				filter(val => 
-					val.tipoIdentificador == "7"
-				),
-				map(val => {
-					datosRespuesta.push({nombre:val.nombre});
-				})
+			var observableCustomer = from(customers);
+			observableCustomer.pipe(
+				filter(val => val.tipoIdentificador == "7"),
+				map(val => transformJSON(val))
 			)
 			.subscribe(
-				val => {
-					console.log(val);
-				},
-				onerror => {
-					console.log("algo");
-				},
-				onComplete => {
-					res.status(200).send(datosRespuesta);
-				}
+				x => customersResponse.push(x),
+				onError => console.log(onError),
+				onComplete => res.status(200).send(customersResponse)
 			);
 	});	
 };
 
-
-
 exports.findById = function(req,res) {
-	res.status(200).send(req.params.id);
-	/*
 	customerModel.findById(req.params.id,function (err,customer) {
-		if(err) res.send(500, err.message);
+		if(err) 
+			res.send(500, err.message);
 		else 
-			console.log("METODO GET CON ID");
-			if(req.params.id == "5"){ res.status(200).send(req.params.id);}
-			else {res.status(200).send(customer);}
-	});*/
+			res.status(200).send(customer);
+	});
 };
