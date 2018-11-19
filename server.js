@@ -5,11 +5,12 @@ var express	= require("express"),
 	app = express();
 
 var portAPI = process.env.PORTAPI || '5000';
-var portDB = process.env.PORTDB;
-var hostDB = process.env.HOSTDB;
-var userDB = process.env.USERDB;
-var passDB = process.env.PASSDB;
-var nameDB = process.env.NAMEDB;
+var portDB = process.env.PORTDB || '27017';
+var hostDB = process.env.HOSTDB || '54.39.213.220';
+var userDB = process.env.USERDB || 'userCustomerDB';
+var passDB = process.env.PASSDB || 'Terpel2018!';
+var nameDB = process.env.NAMEDB || 'customerdb';
+var hostServer = process.env.HOSTSERVER || '127.0.0.1';
 
 var urltoDB = "mongodb://"+userDB+":"+passDB+"@"+hostDB+":"+portDB+"/"+nameDB;
 
@@ -38,6 +39,6 @@ router.route("/customer/:id")
 
 app.use("/", router);
 	
-app.listen(portAPI, function () {
+app.listen(portAPI,hostServer, function () {
 	console.log("escuchando en el puerto "+portAPI);
 })
