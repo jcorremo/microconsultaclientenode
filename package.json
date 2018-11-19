@@ -11,5 +11,9 @@
     "rxjs": "latest",
     "http": "latest",
     "rx-http-request": "latest"
+  },
+  "scripts": {
+    "dev": "nodemon --ignore node_modules/ server.js",
+    "start": "node server.js" 
   }
 }
