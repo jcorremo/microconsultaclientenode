@@ -8,6 +8,4 @@ RUN npm install
 
 COPY . .
 
-EXPOSE ${PORTAPI}
-
 CMD [ "npm", "start" ]
