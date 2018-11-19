@@ -10,7 +10,7 @@ var hostDB = process.env.HOSTDB || '54.39.213.220';
 var userDB = process.env.USERDB || 'userCustomerDB';
 var passDB = process.env.PASSDB || 'Terpel2018!';
 var nameDB = process.env.NAMEDB || 'customerdb';
-var hostServer = process.env.HOSTSERVER || '127.0.0.1';
+var hostServer = process.env.HOSTSERVER || '0.0.0.0';
 
 var urltoDB = "mongodb://"+userDB+":"+passDB+"@"+hostDB+":"+portDB+"/"+nameDB;
 
