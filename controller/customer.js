@@ -1,4 +1,4 @@
-const { Observable, Subject, ReplaySubject, from, of, range } = require('rxjs');
+const { Observable, Subject, ReplaySubject, from, of, range , interval} = require('rxjs');
 const { map, filter, switchMap } = require('rxjs/operators');
 const RxHttpRequest = require('rx-http-request').RxHttpRequest;
 
@@ -18,9 +18,11 @@ var mongoose = require("mongoose"),
 	customerModel = mongoose.model("customer"),
 	http = require('http');
 
+
+
 function transformJSON(jsonCustomer){
 	var responseBody = "";
-
+	
 	RxHttpRequest.get('http://localhost:8089/customer').subscribe(
 		x => responseBody += x.body,
 		err => console.log(err),
@@ -30,6 +32,7 @@ function transformJSON(jsonCustomer){
 	return {nombre : jsonCustomer.nombre + jsonCustomer.codigoSolicitante,
 			webservice : responseBody};
 }
+
 
 exports.findAll = function (req,res) {
 	var customersResponse  = [];
