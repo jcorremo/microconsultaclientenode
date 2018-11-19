@@ -20,6 +20,7 @@ var mongoose = require("mongoose"),
 
 function transformJSON(jsonCustomer){
 	var responseBody = "";
+
 	RxHttpRequest.get('http://localhost:8089/customer').subscribe(
 		x => responseBody += x.body,
 		err => console.log(err),

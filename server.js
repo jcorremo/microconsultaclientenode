@@ -4,7 +4,14 @@ var express	= require("express"),
 	mongoose = require("mongoose"),
 	app = express();
 
-mongoose.connect("mongodb://dbcustomer:dbcustomer123@ds041387.mlab.com:41387/customersdb",
+var portAPI = process.env.PORTAPI || '5000';
+var portDB = process.env.PORTDB;
+var hostDB = process.env.HOSTDB;
+var userDB = process.env.USERDB;
+var passDB = process.env.PASSDB;
+var nameDB = process.env.NAMEDB;
+
+mongoose.connect("mongodb://userDB:passDB@hostDB:portDB/nameDB",
 	{ useNewUrlParser: true },
 	function (err,res) {
 	if(err) console.log("Error en la conexion hacia la DB" + err);
@@ -28,6 +35,6 @@ router.route("/customer/:id")
 
 app.use("/", router);
 	
-app.listen(5000, function () {
-	console.log("escuchando en el puerto 5000");
+app.listen(portAPI, function () {
+	console.log("escuchando en el puerto "+portAPI);
 })
