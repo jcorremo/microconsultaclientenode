@@ -10,6 +10,6 @@ var customer = new mongoose.Schema({
 	razonSocial : String
 });
 
-mongoose.model('customer',customer);
+mongoose.model('customer',customer,'customer');
 
 };

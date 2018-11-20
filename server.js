@@ -5,11 +5,11 @@ var express	= require("express"),
 	app = express();
 
 var portAPI = process.env.PORTAPI || '5000';
-var portDB = process.env.PORTDB || '41387';
-var hostDB = process.env.HOSTDB || 'ds041387.mlab.com';
-var userDB = process.env.USERDB || 'dbcustomer';
-var passDB = process.env.PASSDB || 'dbcustomer123';
-var nameDB = process.env.NAMEDB || 'customersdb';
+var portDB = process.env.PORTDB || '27017';
+var hostDB = process.env.HOSTDB || 'mongoclientes.apps.openshift-master.innovacioneveris.tech';
+var userDB = process.env.USERDB || 'userCustomerDB';
+var passDB = process.env.PASSDB || 'Terpel2018!';
+var nameDB = process.env.NAMEDB || 'customerdb';
 var hostServer = process.env.HOSTSERVER || '0.0.0.0';
 
 var urltoDB = "mongodb://"+userDB+":"+passDB+"@"+hostDB+":"+portDB+"/"+nameDB;
