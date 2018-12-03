@@ -6,7 +6,8 @@ var express	= require("express"),
 
 var portAPI = process.env.PORTAPI || '5000';
 var portDB = process.env.PORTDB || '27017';
-var hostDB = process.env.HOSTDB || 'mongoclientes.apps.openshift-master.innovacioneveris.tech';
+//var hostDB = process.env.HOSTDB || 'mongoclientes.apps.openshift-master.innovacioneveris.tech';
+var hostDB = process.env.HOSTDB || 'mongodb';
 var userDB = process.env.USERDB || 'userCustomerDB';
 var passDB = process.env.PASSDB || 'Terpel2018!';
 var nameDB = process.env.NAMEDB || 'customerdb';
